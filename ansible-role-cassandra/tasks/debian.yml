@@ -1,0 +1,41 @@
+---
+
+- name: debian | Adding Cassandra Debian Repo Key
+  apt_key:
+    url: "{{ cassandra_debian_repo_info.repo_key }}"
+    validate_certs: no
+    state: "present"
+
+- name: debian | Adding Cassandra Debian Repo
+  apt_repository:
+    repo: "{{ cassandra_debian_repo_info.repo }}"
+    state: "present"
+
+#- name: update the cache
+#  apt: 
+#    name: "cassandra"
+#    state: "present"
+- name: Install Cassandra
+  apt: pkg=cassandra={{ cassandra_version }} state=present update-cache=yes force=yes
+  register: cassandra_install
+  tags:
+    - packages
+
+
+
+####Installing from tarball, then uncomment below lines
+#  - name: debian | Installing Cassandra
+#    get_url: 
+#      url: https://archive.apache.org/dist/cassandra/3.9/apache-cassandra-3.9-bin.tar.gz
+#      dest: /opt
+#      validate_certs: no
+
+#  - name: unarchive tarball
+#    unarchive: src=/opt/apache-cassandra-3.9-bin.tar.gz
+#               dest=/opt
+#               copy=no
+
+#  - name: remove tarball
+#    file: state=absent path=/opt/apache-cassandra-3.9-bin.tar.gz
+
+
