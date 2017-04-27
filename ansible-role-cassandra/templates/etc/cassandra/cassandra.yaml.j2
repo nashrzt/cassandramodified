@@ -1,5 +1,20 @@
 cluster_name: '{{ cassandra_cluster_name }}'
 #num_tokens: '{{ num_tokens }}'
+{% set seeds = [] %}
+{% for host in groups['cassandra-cluster-nodes'] -%}
+{#   This is in an if block even though it is just a variable assignment because
+       the only other way to append to an array is with the 'do' Jinja2 extension
+-#}
+{%   if seeds.append(hostvars[host]['ansible_eth0']['ipv4']['address']) -%}{% endif -%}
+{% endfor -%}
+{% set num_hosts = seeds|length -%}
+
+{% for ip in seeds|sort -%}
+{%   if ansible_eth0["ipv4"]["address"] == ip -%}
+initial_token: {{ initial_tokens[num_hosts][loop.index0] }}
+{%   endif -%}
+{% endfor -%}
+
 max_hint_window_in_ms: 10800000 # 3 hours
 hinted_handoff_throttle_in_kb: 1024
 max_hints_delivery_threads: 2
@@ -48,6 +63,15 @@ seed_provider:
           - seeds: "{% for node in groups[cassandra_cluster_group] %}{{ hostvars[node]['ansible_' + cassandra_listen_interface]['ipv4']['address'] }}{% if not loop.last %},{% endif %}{% endfor %}"
 {% endif %}
 concurrent_reads: 32
+{% set seeds = [] %}
+{% set num_hosts = seeds|length -%}
+
+{% for ip in seeds|sort -%}
+{%   if ansible_eth0["ipv4"]["address"] == ip -%}
+initial_token: {{ initial_tokens[num_hosts][loop.index0] }}
+{%   endif -%}
+{% endfor -%}
+
 concurrent_writes: 32
 concurrent_counter_writes: 32
 concurrent_materialized_view_writes: 32
