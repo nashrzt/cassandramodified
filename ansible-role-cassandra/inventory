@@ -1,0 +1,8 @@
+[cassandra-cluster-nodes]
+54.178.238.61
+13.113.66.244
+52.192.103.178
+
+
+[cassandra-cluster-nodes:vars]
+ansible_ssh_private_key_file=/NISHAN_TEST.pem
