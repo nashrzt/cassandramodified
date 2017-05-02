@@ -2,10 +2,7 @@ cluster_name: '{{ cassandra_cluster_name }}'
 #num_tokens: '{{ num_tokens }}'
 {% set seeds = [] %}
 {% for host in groups['cassandra-cluster-nodes'] -%}
-{#   This is in an if block even though it is just a variable assignment because
-       the only other way to append to an array is with the 'do' Jinja2 extension
--#}
-{%   if seeds.append(hostvars[host]['ansible_eth0']['ipv4']['address']) -%}{% endif -%}
+{% if seeds.append(hostvars[host]['ansible_eth0']['ipv4']['address']) -%}{% endif -%}
 {% endfor -%}
 {% set num_hosts = seeds|length -%}
 
