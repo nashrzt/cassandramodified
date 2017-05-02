@@ -4,5 +4,5 @@
   become: true
   become_method: sudo
   roles:
-#      - ansible-role-oracle-java8
+#      - ansible-role-oracle-java8 #java is needed for cassandra to run. Before running cassandra ansible, run java ansible also
       - ansible-role-cassandra
