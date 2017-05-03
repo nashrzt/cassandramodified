@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        ws(dir: 'nashrzt') {
+        ws(dir: 'workspace/nn') {
           sh 'sh ansible.sh'
         }
         
