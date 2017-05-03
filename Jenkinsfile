@@ -16,7 +16,7 @@ pipeline {
         echo 'Deploying....'
       }
     }
-    stage('') {
+    stage('allocate works') {
       steps {
         ws(dir: 'nishan')
       }
