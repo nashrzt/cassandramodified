@@ -4,6 +4,7 @@ pipeline {
     stage('workspace to new') {
       steps {
         ws(dir: 'nishan')
+        echo 'new workspace'
       }
     }
     stage('Build') {
