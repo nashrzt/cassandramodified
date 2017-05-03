@@ -1,5 +1,6 @@
 pipeline {
   agent any
+  customWorkspace '/var/lib/jenkins/naash'
   stages {
     stage('Build') {
       steps {
