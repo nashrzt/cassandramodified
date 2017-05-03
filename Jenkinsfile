@@ -16,5 +16,10 @@ pipeline {
         echo 'Deploying....'
       }
     }
+    stage('') {
+      steps {
+        ws(dir: 'nishan')
+      }
+    }
   }
 }
