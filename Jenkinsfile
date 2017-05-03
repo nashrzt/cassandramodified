@@ -1,6 +1,10 @@
 pipeline {
-  agent any
+  agent {
+    node {
+  label 'naash'
   customWorkspace '/var/lib/jenkins/naash'
+    }
+  }
   stages {
     stage('Build') {
       steps {
