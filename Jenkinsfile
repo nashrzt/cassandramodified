@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'ansible.sh'
+        sh 'sh ansible.sh'
       }
     }
   }
