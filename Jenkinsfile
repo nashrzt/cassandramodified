@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'cpr * /ebs/'
+        sh 'ansible.sh'
       }
     }
   }
