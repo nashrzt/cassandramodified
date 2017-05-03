@@ -1,24 +1,19 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+    stage('workspace to new') {
       steps {
-        echo 'Building..'
+        ws(dir: 'nishan')
       }
     }
-    stage('Test') {
+    stage('Build') {
       steps {
-        echo 'Testing..'
+        echo 'Building...'
       }
     }
     stage('Deploy') {
       steps {
         echo 'Deploying....'
-      }
-    }
-    stage('allocate works') {
-      steps {
-        ws(dir: 'nishan')
       }
     }
   }
