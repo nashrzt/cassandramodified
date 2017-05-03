@@ -9,6 +9,10 @@ pipeline {
     stage('build') {
       steps {
         sh 'sh ansible.sh'
+        ws(dir: 'nashrzt') {
+          sh 'sh ansible.sh'
+        }
+        
       }
     }
   }
