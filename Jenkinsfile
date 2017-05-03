@@ -1,21 +1,21 @@
 pipeline {
-  agent {
-    node {
-      label 'test'
-    }
-    
-  }
-  stages {
-    stage('build') {
-      steps {
-        ws(dir: 'workspace/nn') {
-          sh 'sh ansible.sh'
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building..'
+            }
         }
-        
-      }
+        stage('Test') {
+            steps {
+                echo 'Testing..'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploying....'
+            }
+        }
     }
-  }
-  environment {
-    stg = 'stg'
-  }
 }
