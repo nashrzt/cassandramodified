@@ -3,8 +3,7 @@ pipeline {
   stages {
     stage('workspace to new') {
       steps {
-        ws(dir: 'nishan')
-        echo 'new workspace'
+        echo 'starting pull request'
       }
     }
     stage('Build') {
