@@ -1,5 +1,6 @@
 cluster_name: '{{ cassandra_cluster_name }}'
 #num_tokens: '{{ num_tokens }}'
+<<<<<<< HEAD
 #{% set seeds = [] %}
 #{% for host in groups[cassandranodes] -%}
 #{% if seeds.append(hostvars[host]['ansible_eth0']['ipv4']['address']) -%}{% endif -%}
@@ -11,6 +12,19 @@ cluster_name: '{{ cassandra_cluster_name }}'
 #initial_token: {{ initial_tokens[num_hosts][loop.index0] }}
 #{%   endif -%}
 #{% endfor -%}
+=======
+{% set seeds = [] %}
+{% for host in groups['cassandra-cluster-nodes'] -%}
+{% if seeds.append(hostvars[host]['ansible_eth0']['ipv4']['address']) -%}{% endif -%}
+{% endfor -%}
+{% set num_hosts = seeds|length -%}
+
+{% for ip in seeds|sort -%}
+{%   if ansible_eth0["ipv4"]["address"] == ip -%}
+initial_token: {{ initial_tokens[num_hosts][loop.index0] }}
+{%   endif -%}
+{% endfor -%}
+>>>>>>> 5d2fd938d9a32c6651e33024c27b1092df9e6b5f
 
 max_hint_window_in_ms: 10800000 # 3 hours
 hinted_handoff_throttle_in_kb: 1024
@@ -57,6 +71,7 @@ seed_provider:
 {% if not cassandra_cluster_setup %}
           - seeds: "{{ cassandra_seeds }}"
 {% elif cassandra_cluster_setup %}
+<<<<<<< HEAD
           - seeds: "{% for node in groups[cassandranodes] %}{{ hostvars[node]['ansible_' + cassandra_listen_interface]['ipv4']['address'] }}{% if not loop.last %},{% endif %}{% endfor %}"
 {% endif %}
 concurrent_reads: 32
@@ -65,6 +80,12 @@ concurrent_reads: 32
 {% for host in groups[cassandra-cluster-nodes] -%}
 {% if seeds.append(hostvars[host]['ansible_eth0']['ipv4']['address']) -%}{% endif -%}
 {% endfor -%}
+=======
+          - seeds: "{% for node in groups[cassandra_cluster_group] %}{{ hostvars[node]['ansible_' + cassandra_listen_interface]['ipv4']['address'] }}{% if not loop.last %},{% endif %}{% endfor %}"
+{% endif %}
+concurrent_reads: 32
+{% set seeds = [] %}
+>>>>>>> 5d2fd938d9a32c6651e33024c27b1092df9e6b5f
 {% set num_hosts = seeds|length -%}
 
 {% for ip in seeds|sort -%}

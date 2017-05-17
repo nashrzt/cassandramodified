@@ -1,8 +1,18 @@
 [cassandra-cluster-nodes]
 #don't change the group name, it is been used in templates and other files. If need to change then change every where
+<<<<<<< HEAD
 54.65.131.62
 52.196.53.192
 54.65.218.158
 
 [cassandra-cluster-nodes:vars]
 ansible_ssh_private_key_file=
+=======
+54.178.238.61
+13.113.66.244
+52.192.103.178
+
+
+[cassandra-cluster-nodes:vars]
+ansible_ssh_private_key_file=/NISHAN_TEST.pem
+>>>>>>> 5d2fd938d9a32c6651e33024c27b1092df9e6b5f
