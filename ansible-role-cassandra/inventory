@@ -1,0 +1,8 @@
+[cassandra-cluster-nodes]
+#don't change the group name, it is been used in templates and other files. If need to change then change every where
+54.65.131.62
+52.196.53.192
+54.65.218.158
+
+[cassandra-cluster-nodes:vars]
+ansible_ssh_private_key_file=
